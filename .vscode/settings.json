@@ -1,5 +1,0 @@
-{
-    "jshint.enable": false,
-    "eslint.format.enable": true,
-    "eslint.lintTask.enable": true
-}
