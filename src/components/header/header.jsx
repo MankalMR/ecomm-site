@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import './header.scss';
 
-const Header = () => (
+const Header = ({ logOffCallback }) => (
     <div className="header">
         <Link className="logo-container" to="/">
             <Logo className="logo" />
@@ -16,8 +17,20 @@ const Header = () => (
             <Link className="option" to="/contact">
                 CONTACT
             </Link>
+            {
+                logOffCallback ?
+                    <div className="option" onClick={ logOffCallback }>SIGN OUT</div>
+                    :
+                    <Link className="option" to="/login">
+                        SIGN IN
+                    </Link>
+            }
         </div>
     </div>
 );
+
+Header.propTypes = {
+    logOffCallback: PropTypes.func
+}
 
 export default Header;
