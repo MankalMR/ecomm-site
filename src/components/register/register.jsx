@@ -1,4 +1,5 @@
 import React from  'react';
+import PropTypes from 'prop-types';
 
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
@@ -18,12 +19,12 @@ class Register extends React.Component {
         }
     }
 
-    handleChange = event => {
+    handleChange(event) {
         const { name, value } = event.target;
         this.setState({[name]: value});
     }
 
-    handleSubmit = async event => {
+    async handleSubmit(event) {
         event.preventDefault();
 
         const { displayName, email, password, confirmPassword } = this.state;
@@ -47,6 +48,9 @@ class Register extends React.Component {
             password: '',
             confirmPassword: ''
           });
+
+          // calling success callback
+          this.props.successCallback();
         } catch (error) {
           console.error(error);
         }
@@ -91,6 +95,10 @@ class Register extends React.Component {
             </section>
         )
     }
+}
+
+Register.propTypes = {
+    successCallback: PropTypes.func
 }
 
 export default Register;

@@ -1,14 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import Login from '../../components/login/login';
 import Register from '../../components/register/register';
 import './login-register.scss';
 
-const LoginRegister = () => (
+const LoginRegister = ({ history }) => (
     <div className="login-register">
-        <Login />
-        <Register />
+        <Login successCallback={ () => history.push('/') } />
+        <Register successCallback={ () => history.push('/') } />
     </div>
 );
 
-export default LoginRegister;
+LoginRegister.propTypes = {
+    history: PropTypes.object
+}
+
+export default withRouter(LoginRegister);
