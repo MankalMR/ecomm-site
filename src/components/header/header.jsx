@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { auth } from "../../firebase/firebase.utils";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+import CartIcon from "../cart-icon/cart-icon";
+import MiniCart from "../mini-cart/mini-cart";
 import "./header.scss";
 
 const logUserOff = event => {
@@ -13,7 +15,7 @@ const logUserOff = event => {
   auth.signOut();
 };
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, showMiniCart }) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -38,14 +40,20 @@ const Header = ({ currentUser }) => (
           SIGN IN
         </Link>
       )}
+      <CartIcon />
     </div>
+    {showMiniCart ? <MiniCart /> : null}
   </div>
 );
 
 Header.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  showMiniCart: PropTypes.bool
 };
 
-const mapStateToProps = state => ({ currentUser: state.user.currentUser });
+const mapStateToProps = ({
+  user: { currentUser },
+  cart: { showMiniCart }
+}) => ({ currentUser, showMiniCart });
 
 export default connect(mapStateToProps)(Header);
