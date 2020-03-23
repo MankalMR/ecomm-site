@@ -11,8 +11,11 @@ const renderCartItems = cartItems =>
   cartItems.map(item => <CartItem key={item.id} item={item} />);
 
 const MiniCart = ({ cartItems }) => (
-  <div className='mini-cart'>
-    <div className='cart-items'>{renderCartItems(cartItems)}</div>
+  <div className={cartItems.length ? 'mini-cart' : 'mini-cart empty-cart'}>
+    <div className='cart-items'>
+      {renderCartItems(cartItems)}
+      <span className='empty-message'>Your Cart is Empty</span>
+    </div>
     <Button>Checkout</Button>
   </div>
 );
