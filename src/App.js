@@ -1,16 +1,17 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { setCurrentUser } from "./redux-store/user/user.actions";
-import "./App.scss";
+import { setCurrentUser } from './redux-store/user/user.actions';
+import './App.scss';
 
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
-import Header from "./components/header/header";
-import Homepage from "./pages/homepage/homepage";
-import Shop from "./pages/shop/shop";
-import LoginRegister from "./pages/login-register/login-register";
+import Header from './components/header/header';
+import Homepage from './pages/homepage/homepage';
+import Shop from './pages/shop/shop';
+import Checkout from './pages/checkout/checkout';
+import LoginRegister from './pages/login-register/login-register';
 
 class App extends React.Component {
   authStateUnsubscribe = null;
@@ -39,15 +40,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <Header />
         <Switch>
-          <Route exact={true} path="/" component={Homepage} />
-          <Route path="/shop" component={Shop} />
+          <Route exact={true} path='/' component={Homepage} />
+          <Route path='/shop' component={Shop} />
+          <Route path='/checkout' component={Checkout} />
           <Route
-            path="/login"
+            path='/login'
             render={() =>
-              this.props.currentUser ? <Redirect to="/" /> : <LoginRegister />
+              this.props.currentUser ? <Redirect to='/' /> : <LoginRegister />
             }
           />
         </Switch>
