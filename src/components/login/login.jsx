@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from 'prop-types';
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
@@ -30,9 +29,6 @@ class Login extends React.Component {
     try {
         await auth.signInWithEmailAndPassword(email, password);
         this.setState({ email: "", password: "" });
-
-        // calling success callback
-        this.props.successCallback();
     } catch (err) {
         console.error(err);
     }
@@ -67,10 +63,6 @@ class Login extends React.Component {
       </section>
     );
   }
-}
-
-Login.propTypes = {
-  successCallback: PropTypes.func
 }
 
 export default Login;

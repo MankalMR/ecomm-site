@@ -1,5 +1,4 @@
 import React from  'react';
-import PropTypes from 'prop-types';
 
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
@@ -48,9 +47,6 @@ class Register extends React.Component {
             password: '',
             confirmPassword: ''
           });
-
-          // calling success callback
-          this.props.successCallback();
         } catch (error) {
           console.error(error);
         }
@@ -95,10 +91,6 @@ class Register extends React.Component {
             </section>
         )
     }
-}
-
-Register.propTypes = {
-    successCallback: PropTypes.func
 }
 
 export default Register;
