@@ -26,5 +26,19 @@ export const addToCart = (items, newItem) => {
 };
 
 export const removeFromCart = (items, itemToRemove) => {
-    return items.filter(cartItem => cartItem.id !== itemToRemove.id)
-}
+  const existingItem = items.find(item => item.id === itemToRemove.id);
+
+  if (existingItem.quantity === 1) {
+    return items.filter(cartItem => cartItem.id !== itemToRemove.id);
+  }
+
+  return items.map(cartItem =>
+    cartItem.id === itemToRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
+
+export const clearFromCart = (items, itemToClear) => {
+  return items.filter(cartItem => cartItem.id !== itemToClear.id);
+};

@@ -26,6 +26,10 @@
             justify-content: space-between;
             width: 50%;
         }
+
+        .arrow {
+            display: none;
+        }
     }
 
     .remove-button {
@@ -53,21 +57,32 @@
         width: 69%;
     }
     .name,
-    .quantity,
+    .value,
     .price {
         width: 23%;
+    }
+    .price {
+        margin-left: 50px;
     }
     .qty-price {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         width: 100%;
+
+        .qty-grp {
+            display: flex;
+            justify-content: space-around;
+        }
     }
     .cross {
         display: none;
     }
-    .quantity {
-        padding-left: 20px;
+    .value {
+        margin: 0 10px;
+    }
+    .arrow {
+        cursor: pointer;
     }
 
     .remove-button {

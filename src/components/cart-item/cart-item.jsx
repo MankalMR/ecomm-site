@@ -2,11 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { removeFromCart } from '../../redux-store/cart/cart.actions';
+import {
+  removeFromCart,
+  addToCart,
+  clearFromCart
+} from '../../redux-store/cart/cart.actions';
 
 import './cart-item.scss';
 
-const CartItem = ({ item, classes, removeFromCart }) => {
+const CartItem = ({
+  item,
+  classes,
+  addToCart,
+  removeFromCart,
+  clearFromCart
+}) => {
   const { name, price, imageUrl, quantity } = item;
   return (
     <div className={classes}>
@@ -14,12 +24,20 @@ const CartItem = ({ item, classes, removeFromCart }) => {
       <div className='item-details'>
         <span className='name'>{name}</span>
         <div className='qty-price'>
-          <span className='quantity'>{quantity}</span>
+          <div className='qty-grp'>
+            <span className='arrow' onClick={() => removeFromCart(item)}>
+              &#10094;
+            </span>
+            <span className='value'>{quantity}</span>
+            <span className='arrow' onClick={() => addToCart(item)}>
+              &#10095;
+            </span>
+          </div>
           <span className='cross'>X</span>
           <span className='price'>${price}</span>
         </div>
       </div>
-      <div className='remove-button' onClick={() => removeFromCart(item)}>
+      <div className='remove-button' onClick={() => clearFromCart(item)}>
         &#10005;
       </div>
     </div>
@@ -29,7 +47,11 @@ const CartItem = ({ item, classes, removeFromCart }) => {
 CartItem.propTypes = {
   item: PropTypes.object,
   classes: PropTypes.string,
-  removeFromCart: PropTypes.func
+  addToCart: PropTypes.func,
+  removeFromCart: PropTypes.func,
+  clearFromCart: PropTypes.func
 };
 
-export default connect(null, { removeFromCart })(CartItem);
+export default connect(null, { addToCart, removeFromCart, clearFromCart })(
+  CartItem
+);
