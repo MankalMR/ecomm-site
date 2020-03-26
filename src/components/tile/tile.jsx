@@ -1,31 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import TileItem from '../tile-item/tile-item';
-import TILE_DATA from './tile.data';
 import './tile.scss';
 
-class Tile extends React.Component {
-  constructor() {
-    super();
+const renderTileItems = categories => {
+  return categories.map(({ id, ...tileItemListProps }) => (
+    <TileItem key={id} {...tileItemListProps} />
+  ));
+};
 
-    this.state = {
-      tileItemList: TILE_DATA
-    };
-  }
+const Tile = ({ categories }) => (
+  <div className='tile'>{renderTileItems(categories)}</div>
+);
 
-  renderTileItems() {
-    return this.state.tileItemList.map(({ id, ...tileItemListProps }) =>
-        <TileItem key={id} { ...tileItemListProps } />
-    );
-  }
+const mapStateToProps = ({ categories }) => ({ categories });
 
-  render() {
-    return (
-      <div className='tile'>
-        { this.renderTileItems() }
-      </div>
-    );
-  }
-}
+Tile.propTypes = {
+  categories: PropTypes.array
+};
 
-export default Tile;
+export default connect(mapStateToProps)(Tile);
