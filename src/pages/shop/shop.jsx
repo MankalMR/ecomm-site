@@ -1,21 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
-import Collection from '../../components/collection/collection';
+import CollectionOverview from '../collection-overview/collection-overview';
+import Category from '../category/category';
 
-const Shop = ({ products }) => (
-  <div className='shop-page'>
-    {products.map(({ id, ...otherCollectionProps }) => {
-      return <Collection key={id} {...otherCollectionProps} preview={4} />;
-    })}
-  </div>
-);
-
-const mapStateToProps = ({ products }) => ({ products });
-
-Shop.propTypes = {
-  products: PropTypes.array
+const Shop = ({ match }) => {
+  return (
+    <div className='shop-page'>
+      <Switch>
+        <Route exact path={`${match.path}`} component={CollectionOverview} />
+        <Route
+          exact
+          path={`${match.path}/:categoryName`}
+          component={Category}
+        />
+      </Switch>
+    </div>
+  );
 };
 
-export default connect(mapStateToProps)(Shop);
+Shop.propTypes = {
+  match: PropTypes.object
+};
+
+export default Shop;

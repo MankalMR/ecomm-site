@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 import './tile-item.scss';
 
-const TileItem = ({ title, imageUrl, size }) => (
-  <div className={`${size} tile-item`}>
+const TileItem = ({ title, imageUrl, size, history }) => (
+  <div className={`${size} tile-item`} onClick={ () => history.push(`/shop/${title}`)}>
     <div
       className='background-image'
       style={{
@@ -21,7 +22,8 @@ const TileItem = ({ title, imageUrl, size }) => (
 TileItem.propTypes = {
     title: PropTypes.string,
     imageUrl: PropTypes.string,
-    size: PropTypes.string
+    size: PropTypes.string,
+    history: PropTypes.object
 }
 
-export default TileItem;
+export default withRouter(TileItem);

@@ -11,13 +11,19 @@ const filterItems = (items, previewCount) =>
 const renderItems = items =>
   items.map(item => <CollectionItem key={item.id} item={item} />);
 
-const Collection = ({ title, items, preview }) => {
+const Collection = ({ title, routeName, items, preview, relativePath }) => {
   const collectionMarkup = preview
     ? renderItems(filterItems(items, preview))
     : renderItems(items);
   return (
     <div className='collection'>
-      <h1 className='title'>{title}</h1>
+      <h1 className='title'>
+        {relativePath ? (
+          <a href={`${relativePath}/${routeName}`}>{title}</a>
+        ) : (
+          title
+        )}
+      </h1>
       <div className='preview'>{collectionMarkup}</div>
     </div>
   );
@@ -25,8 +31,10 @@ const Collection = ({ title, items, preview }) => {
 
 Collection.propTypes = {
   title: PropTypes.string,
+  routeName: PropTypes.string,
   items: PropTypes.array,
-  preview: PropTypes.number
+  preview: PropTypes.number,
+  relativePath: PropTypes.string
 };
 
 export default Collection;
