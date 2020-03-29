@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import CartItem from '../../components/cart-item/cart-item';
+import StripeCheckoutButton from '../../components/stripe-checkout-button/stripe-checkout-button';
 
 import './checkout.scss';
 
@@ -30,6 +31,12 @@ const Checkout = ({ cartItems, total }) => {
         <CartItem key={cartItem.id} item={cartItem} classes='checkout-item' />
       ))}
       <div className='total'>TOTAL: ${total}</div>
+      <div className='test-warning'>
+        *Please use the following test credit card for payments*
+        <br />
+        4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
+      </div>
+      <StripeCheckoutButton price={total} />
     </div>
   );
 };
